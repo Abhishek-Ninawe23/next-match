@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { Button, Navbar, NavbarBrand, NavbarContent } from "@heroui/react"
 import Link from "next/link"
 import { GiMatchTip } from "react-icons/gi"
