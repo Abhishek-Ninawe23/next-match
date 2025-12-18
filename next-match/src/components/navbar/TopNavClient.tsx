@@ -9,6 +9,7 @@ import { GiMatchTip } from "react-icons/gi";
 import NavLink from "./NavLink";
 import UserMenu from "./UserMenu";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TopNavClient({ session }: { session: any }) {
     return (
         <Navbar
