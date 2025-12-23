@@ -1,6 +1,7 @@
 'use client'
 import { registerUser } from "@/app/actions/authActions";
 import { RegisterSchemas, registerSchemas } from "@/lib/schemas/registerSchemas";
+import { handleFormServerErrors } from "@/lib/util";
 import { Card, CardHeader, CardBody, Input, Button } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,14 +23,7 @@ const RegisterForm = () => {
             console.log("User registered successfully");
 
         } else {
-            if (Array.isArray(result.error)) {
-                result.error.forEach((e) => {
-                    const fieldName = e.path.join('.') as 'email' | 'name' | 'password';
-                    setError(fieldName, { message: e.message });
-                })
-            } else {
-                setError('root.serverError', { message: result.error });
-            }
+            handleFormServerErrors(result, setError)
         }
 
     }

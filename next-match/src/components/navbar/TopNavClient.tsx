@@ -9,8 +9,16 @@ import { GiMatchTip } from "react-icons/gi";
 import NavLink from "./NavLink";
 import UserMenu from "./UserMenu";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function TopNavClient({ session }: { session: any }) {
+type Props = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    session: any,
+    userInfo: {
+        image: string | null;
+        name: string | null;
+    }
+}
+
+export default function TopNavClient({ session, userInfo }: Props) {
     return (
         <Navbar
             maxWidth="xl"
@@ -40,8 +48,8 @@ export default function TopNavClient({ session }: { session: any }) {
 
             <NavbarContent justify="end">
                 {
-                    session?.user ? (
-                        <UserMenu user={session.user} />
+                    userInfo ? (
+                        <UserMenu userInfo={userInfo} />
                     ) : (
                         <>
                             <Button as={Link} href="/login" variant="bordered" className="text-white">

@@ -6,8 +6,8 @@ type Props = {
 };
 
 export default async function PhotosPage({ params }: Props) {
-    const { userId } = await params;           // ✅ REQUIRED in Next 16
-    const photos = await getMemberPhotosByUserId(userId); // ✅ await
+    const { userId } = await params;
+    const photos = await getMemberPhotosByUserId(userId);
 
     return (
         <>

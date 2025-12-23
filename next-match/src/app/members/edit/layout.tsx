@@ -1,27 +1,26 @@
 import { ReactNode } from "react";
 import { getMemberByUserId } from "@/app/actions/memberAction";
 import { notFound } from "next/navigation";
-import MemberLayoutClient from "./MemberLayoutClient";
+import MemberLayoutClient from "../[userId]/MemberLayoutClient";
+import { getAuthUserId } from "@/app/actions/authActions";
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 type Props = {
     children: ReactNode;
-    params: { userId: string };
 };
 
-const Layout = async ({ children, params }: { children: ReactNode, params: Promise<{ userId: string }> }) => {
+const Layout = async ({ children }: Props) => {
 
-    const { userId } = await params;
+    const userId = await getAuthUserId();
     const member = await getMemberByUserId(userId)
     if (!member) return notFound();
 
-    const basePath = `/members/${member.userId}`
+    const basePath = `/members/edit`
     const navLinks = [
-        { name: 'Profile', href: `${basePath}` },
-        { name: 'Photos', href: `${basePath}/photos` },
-        { name: 'Chats', href: `${basePath}/chats` }
+        { name: 'Edit Profile', href: `${basePath}` },
+        { name: 'Update Photos', href: `${basePath}/photos` }
     ]
 
     return (
@@ -30,4 +29,5 @@ const Layout = async ({ children, params }: { children: ReactNode, params: Promi
         </MemberLayoutClient>
     );
 }
+
 export default Layout
